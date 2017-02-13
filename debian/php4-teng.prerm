@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# $Id: php4-teng.prerm,v 1.2 2005-11-09 12:44:08 vasek Exp $
+#
+# Pre-remove script.
+#
+
+set -e
+
+if [ "$1" != "remove" -a "$1" != "purge" ]; then
+    exit 0
+fi
+
+for INI in /etc/php.ini /etc/php4/apache/php.ini /etc/php4/apache2/php.ini /etc/php4/cgi/php.ini; do
+    if [ -f $INI ]; then
+        if grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*teng.so" $INI; then
+            echo "You are removing Teng support for php4, but it is still"
+            echo "enabled in your $INI."
+            echo
+            echo "You should remove this line:"
+            echo
+            echo "extension=teng.so"
+            echo
+            echo -n "Do you want me to do it now [Y/n] ?"
+            read a
+            if ! echo $a | grep -iq ^n; then
+                cat $INI | grep -v "^[[:space:]]*extension[[:space:]]*=[[:space:]]*teng.so" > $INI.tengremove
+                mv $INI.tengremove $INI
+            fi
+        fi
+    fi
+done
+
+exit 0

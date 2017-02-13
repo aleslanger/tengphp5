@@ -1,0 +1,15 @@
+Package: @PACKAGE@
+Version: @VERSION@
+Architecture: @ARCHITECTURE@
+Depends: @SH_DEPEND@, @EXTRA_DEPEND@
+Maintainer: @MAINTAINER@
+Installed-Size: @SIZE@
+Description: Teng module for php4
+ Teng is a powerful and easy to use templating system.
+ .
+ This package provides a module for Teng functions in PHP scripts.
+ .
+ PHP4 is an HTML-embedded scripting language. Much of its syntax is borrowed
+ from C, Java and Perl with a couple of unique PHP-specific features thrown
+ in. The goal of the language is to allow web developers to write
+ dynamically generated pages quickly.
